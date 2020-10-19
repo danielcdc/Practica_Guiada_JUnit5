@@ -30,6 +30,7 @@ public class CuentaCorrienteTest {
 
     // Iniciamos los test con un enfoque de caja negra, con valores límites.
 
+    // Comenzamos con el método de déposito de efectivo.
     /**
      * Comprueba un valor positivo muy elevado. Se espera True.
      */
@@ -54,6 +55,40 @@ public class CuentaCorrienteTest {
         assertFalse(cc1.deposit(-1000));
     }
 
+    // Continuamos con el método de validación de retirada de efectivo.
+
+    /**
+     * Comprueba que devuelve True al insertar una cantidad positiva
+     * y una comisión del 0.01% sobre la cantidad retirada.
+     */
+    @Test
+    void withdrawTest1(){
+        float amount = 1000;
+        float fee = amount * (float) 0.01;
+        assertTrue(cc1.withdraw(amount, fee));
+    }
+
+    /**
+     * Comprueba que devuelve False al insertar 0 como valor de retirada
+     * y una comisión del 0,01%.
+     */
+    @Test
+    void withdrawTest2(){
+        float amount = 0;
+        float fee = amount * (float) 0.01;
+        assertFalse(cc1.withdraw(amount, fee));
+    }
+
+    @Test
+    /**
+     * Comprueba wue devuelve False al insertar un valor negativo de retirada y
+     * una comisión del 0.01%.
+     */
+    void withdrawTest3(){
+        float amount = -1000;
+        float fee = amount * (float) 0.01;
+        assertFalse(cc1.withdraw(amount, fee));
+    }
 
 
 }
